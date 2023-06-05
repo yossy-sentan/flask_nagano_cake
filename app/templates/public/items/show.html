@@ -1,0 +1,43 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="row">
+	<div class="col-3">
+		{% include "public/genres/index.html" %} 
+	</div>
+
+	<div class="col-3 mr-5">
+		<img src="{{item.image_path}}" width="300" height="250">
+	</div>
+
+	<div class="col-5">
+		<h2>{{item.name}}</h2>
+		<p class="link-dark">ジャンル: <a href="{{url_for('item.index', genre_id=item.genre.id)}}">{{ item.genre.name }}</a></p>
+		<h4>{{item.introduction}}</h4><br><br>
+		<h4>￥{{item.with_tax_price()}} <small><small>(税込)</small></small></h4><br>
+		{% if current_user.is_authenticated %}
+			{% if item.is_active %}
+                <form action="{{url_for('cart.create')}}" method="POST">
+                    <input type="hidden" value="{{ item.id }}" name="item_id">
+                    <select name="amount" class="classic mr-5">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    <button type="submit">カートに入れる</button>
+                </form>
+			{% else %}
+				<p class="bold">こちらの商品は、現在販売停止中です。</p>
+			{% endif %}
+		{% else %}
+			<p class="link-underline">カート機能をご利用いただくには、<br><a href="{{url_for('customer.new')}}">こちら</a>から新規登録を行なってください。</p>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

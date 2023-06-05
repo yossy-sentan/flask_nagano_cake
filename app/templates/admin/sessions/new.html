@@ -1,0 +1,24 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<h4 class="bg-gray mb-5">ログイン</h4>
+<div class="d-flex justify-content-center">
+    <form action="{{url_for('admin_session.create')}}" method="POST">
+        <table class="table table-borderless">
+            <tbody>
+                <tr>
+                    <td><label name="admin_id">メールアドレス</label></td>
+                    <td><input type="text" name="admin_id"></td>
+                </tr>
+                <tr>
+                    <td><label name="password">パスワード</label></td>
+                    <td><input type="password" name="password"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="submit" class="btn btn-primary">ログイン</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+{% endblock %}

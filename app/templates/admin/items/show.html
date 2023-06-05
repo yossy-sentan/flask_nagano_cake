@@ -1,0 +1,44 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="col-4 d-flex justify-content-center mb-5">
+    <h4 class="bg-gray">商品詳細</h4>
+  </div>
+  <div class="row">
+      <div class="col-4 mr-5">
+            <img src="{{item.image_path}}" width="360" height="300">
+      </div>
+      <div class="col-6">
+          <table class="table table-borderless">
+              <tr>
+                  <td style="width:26%">商品名</td>
+                  <td>{{ item.name }}</td>
+              </tr>
+              <tr>
+                  <td>商品説明</td>
+                  <td class="align-middle">{{ item.introduction }}</td>
+              </tr>
+              <tr>
+                  <td>ジャンル</td>
+                  <td>{{ item.genre.name }}</td>
+              </tr>
+              <tr>
+                  <td>税込価格</br>(税抜価格)</td>
+                  <td class="align-middle"><big>{{ item.with_tax_price()}}({{item.price}})円</big></td>
+              </tr>
+              <tr>
+                  <td>販売ステータス</td>
+                  <td>
+                      {% if item.is_active %}
+                          <strong class="text-success">販売中</strong>
+                      {% else %}
+                          <span class="text-secondary">販売停止中</span>
+                      {% endif %}
+                  </td>
+              </tr>
+          </table>
+          <div class="col-8 text-center">
+                <a href="{{url_for('admin_item.edit', id=item.id)}}" class="btn btn-success px-4 py-2">編集する</a>
+          </div>
+      </div>
+  </div>
+{% endblock %}

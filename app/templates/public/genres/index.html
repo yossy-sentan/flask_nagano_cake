@@ -1,0 +1,14 @@
+<table class="table table-thead-borderd table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">ジャンル検索</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for genre in genres %}
+            <tr>
+                <td class="link-dark"><a href="{{url_for('item.index', genre_id=genre.id)}}">{{ genre.name }}</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

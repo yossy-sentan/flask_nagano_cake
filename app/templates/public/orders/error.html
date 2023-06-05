@@ -1,0 +1,11 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="text-center mt-5">
+	<h2 class="my-5"><strong>エラー</strong></h2>
+	<h3>
+		問題が発生しました。</br>
+		お手数ですが、再度情報入力からやり直していただきますようお願いします。
+	</h3>
+	<a href="{{url_for('order.new')}}" class="btn btn-success px-4">情報入力に進む</a>
+</div>
+{% endblock %}

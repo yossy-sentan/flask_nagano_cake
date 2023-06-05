@@ -1,0 +1,51 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<h4>配送先登録/一覧</h4>
+<form action="{{url_for('address.create')}}" method="POST">
+    <table class="table table-borderless mt-4">
+        <tr>
+            <td style="width:20%"><label for="post_code">郵便番号(ハイフンなし)</label></td>
+            <td style="width:20%"><input type="number" name="post_code" id="post_code" required></td>
+            <td style="width:20%"></td>
+            <td style="width:20%"></td>
+        </tr>
+        <tr>
+            <td><label for="address">住所</label></td>
+            <td colspan="2", class="pr-0"><input type="text" name="address" id="address" required></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><label for="name">宛名</label></td>
+            <td><input type="text" name="name" id="name" required></td>
+            <td></td>
+            <td><button type="submit" class="btn btn-success px-4">新規登録</button></td>
+        </tr>
+    </table>
+</form>
+
+<table class="table table-bordered mt-5", style="width:75%">
+	<thead class="table-active">
+		<tr>
+			<th style="width:10%">郵便番号</th>
+			<th style="width:50%">住所</th>
+			<th style="width:10%">宛名</th>
+			<th style="width:28%"></th>
+		</tr>
+	</thead>
+    <tbody>
+        {% for address in addresses %}
+            <tr>
+                <td>{{ address.post_code }}</td>
+                <td>{{ address.address }}</td>
+                <td>{{ address.name }}</td>
+                <td class="text-center">
+                    <a href="{{url_for('address.edit', id=address.id)}}" class="btn btn-success px-3">編集する</a>
+                    <form action="{{url_for('address.delete', id=address.id)}}" method="POST">
+                        <button type="submit" class="btn btn-danger px-3">削除する</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

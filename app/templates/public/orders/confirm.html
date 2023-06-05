@@ -1,0 +1,71 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="col-5 d-flex justify-content-center">
+	<h4 class="bg-gray">注文情報確認</h4>
+</div>
+<div class="row">
+	<div class="col-8">
+		<table class="table table-bordered">
+			<thead class="table-active">
+				<tr>
+					<th style="width: 45%">商品名</th>
+					<th style="width: 15%">単価(税込)</th>
+					<th style="width: 15%">数量</th>
+					<th style="width: 15%">小計</th>
+				</tr>
+			</thead>
+			<tbody>
+                {% for cart_item in cart_items %}
+                    <tr>
+                        <td class="link-dark">
+                            <a href="{{url_for('item.show', id=cart_item['item'].id)}}">
+                                <img src="{{cart_item['item'].image_path}}" width="100" height="75" class="mr-2">
+                                {{ cart_item['item'].name }}
+                            </a>
+                        </td>
+                        <td>{{ cart_item['item'].with_tax_price() }}</td>
+                        <td>{{ cart_item['amount'] }}</td>
+                        <td>{{ cart_item['sub_total'] }}</td>
+                    </tr>
+                {% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div class="col-4">
+		<table class="table table-bordered td-active ml-4", style="width:250px">
+			<tr>
+				<td style="width:55%">送料</td>
+				<td>{{ order.shipping_cost }}</td>
+			</tr>
+			<tr>
+				<td>商品合計</td>
+				<td>{{ item_total_price }}</td>
+			</tr>
+			<tr>
+				<td>請求金額</td>
+				<td>{{ order.total_price }}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<form action="{{url_for('order.create')}}" method="POST">
+	<table class="table table-borderless">
+		<tr>
+			<td style="width:10%"><big><strong>支払方法<strong></big></td>
+			<td>{{ order.payment_method_ja() }}</td>
+			<input type="hidden" name="payment_method" value="{{order.payment_method}}">
+		</tr>
+		<tr>
+			<td><big><strong><label>お届け先</label><strong></big></td>
+			<td>{{ order.show_address() }}
+            <input type="hidden" name="total_price" value="{{order.total_price}}">
+            <input type="hidden" name="post_code" value="{{order.post_code}}">
+            <input type="hidden" name="address" value="{{order.address}}">
+            <input type="hidden" name="name" value="{{order.name}}">
+		</tr>
+	</table>
+	<div class="text-center">
+        <button type="submit" class="btn btn-success px-4">注文を確定する</button>
+	</div>
+</form>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="col-7 d-flex justify-content-center mb-3">
+  <h4 class="bg-gray">{{ customer.full_name() }}さんの会員詳細</h4>
+</div>
+
+<form action="{{url_for('admin_customer.update', id=customer.id)}}" method="POST" class="ml-5">
+  <table class="table table-borderless">
+    <tbody>
+    	<tr>
+        <td style="width:20%">会員ID</td>
+        <td style="width:25%">{{ customer.id}}</td>
+        <td style="width:25%"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>氏名</td>
+        <td><input type="text" name="last_name" id="last_name" value="{{customer.last_name}}" required></td>
+        <td><input type="text" name="first_name" id="first_name" value="{{customer.first_name}}" required></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>フリガナ</td>
+        <td><input type="text" name="last_name_kana" id="last_name_kana" value="{{customer.last_name_kana}}" required></td>
+        <td><input type="text" name="first_name_kana" id="first_name_kana" value="{{customer.last_name_kana}}" required></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><label for="post_code">郵便番号(ハイフンなし)</label></td>
+        <td><input type="number" name="post_code" id="post_code" value="{{customer.post_code}}" required></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><label for="address">住所</label></td>
+        <td colspan="3"><input type="text" name="address" id="address" value="{{customer.address}}" required></td>
+      </tr>
+      <tr>
+        <td><label for="tel_number">電話番号(ハイフンなし)</label></td>
+        <td><input type="number" name="tel_number" id="tel_number" value="{{customer.tel_number}}" required></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><label for="email">メールアドレス</label></td>
+        <td><input type="email" name="email" id="email" value="{{customer.email}}" required></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+      	<td>会員ステータス</td>
+      	<td>
+            <input type="radio" name="is_active" id="is_active_true" value="1" {{ "checked" if customer.is_active }}>
+            <label for="is_active_true" class="mr-3">有効</label>
+            <input type="radio" name="is_active" id="is_active_false" value="0" {{ "checked" if not customer.is_active }}>
+            <label for="is_active_false">退会</label>
+      	</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><button type="submit" class="btn btn-success px-4 py-2">変更内容を保存</button></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+{% endblock %}

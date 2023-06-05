@@ -1,0 +1,25 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="row">
+	<div class="col-3">
+		{% include 'public/genres/index.html' %}
+	</div>
+
+	<div class="col-9">
+		<h4>商品一覧(全{{ items_count }}件)</h4>
+		{% if items %}
+			<div class="row">
+                {% for item in items %} 
+                    <div class="col-3 mb-4">
+                        <a href="{{url_for('item.show', id=item.id)}}"><img src="{{item.image_path}}" width="200" height="160"></a>
+                        {{ item.name }}<br>
+                        ￥{{ item.with_tax_price() }}<br>
+                    </div>
+                {% endfor %}
+            </div>
+		{% else %}
+			<h3>対応する商品はありませんでした。</h3>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

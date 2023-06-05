@@ -1,0 +1,48 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="col-3 d-flex justify-content-center mb-5">
+    <h4 class="bg-gray">商品編集</h4>
+</div>
+<form action="{{url_for('admin_item.update', id=item.id)}}" method="POST" enctype="multipart/form-data">
+    <table class="table table-borderless admin-item-form ml-5">
+        <tr>
+            <td style="width:15%"><label for="image">商品画像</label></td>
+            <td><input type="file" name="image" id="image" accept="image/*"></td>
+        </tr>
+        <tr>
+            <td><label for="name">商品名</label></td>
+            <td><input type="text" name="name" id="name" value="{{item.name}}" required>
+        </tr>
+        <tr>
+            <td><label for="introduction">商品説明</label></td>
+            <td><input type="text" name="introduction" id="introduction" value="{{item.introduction}}" required></td>
+        </tr>
+        <tr>
+            <td><label for="genre_id">ジャンル</label></td>
+            <td>
+                <select name="genre_id" id="genre_id" class="classic mr-5">
+                    {% for genre in genres %} 
+                        <option value="{{genre.id}}" {{"selected" if item.genre_id==genre.id}}>{{ genre.name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="price">税抜価格</label></td>
+            <td><input type="number" name="price" id="price" value="{{item.price}}" required> 円</td>
+        </tr>
+        <tr>
+            <td>販売ステータス</td>
+            <td>
+                <input type="radio" name="is_active" id="is_active_true" value="1" {{ "checked" if item.is_active }}>
+                <label for="is_active_true" class="mr-3">販売中</label>
+                <input type="radio" name="is_active" id="is_active_false" value="0" {{ "checked" if not item.is_active }}>
+                <label for="is_active_false">販売停止中</label>
+            </td>
+        </tr>
+    </table>
+    <div class="col-9 text-center">
+        <button type="submit" class="btn btn-success px-4 py-2">変更を保存</button>
+    </div>
+</form>
+{% endblock %}

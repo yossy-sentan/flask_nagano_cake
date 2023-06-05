@@ -1,0 +1,11 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="col-4 d-flex justify-content-center mb-5">
+    <h4 class="bg-gray">ジャンル編集</h4>
+</div>
+<form action="{{url_for('admin_genre.update', id=genre.id)}}" method="POST">
+    <label name="name">ジャンル名</label>
+    <input type="text" name="name" value="{{genre.name}}" required>
+    <button type="submit" class="btn btn-success px-4">変更を保存</button>
+</form>
+{% endblock %}

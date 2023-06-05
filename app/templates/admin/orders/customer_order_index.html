@@ -1,0 +1,24 @@
+<div class="d-flex justify-content-center">
+    <table class="table admin-table link-dark" style="width:80%">
+        <thead>
+            <tr class="table-secondary">
+            <th style="width:10%"></th>
+            <th style="width:35%">購入日時</th>
+                    <th style="width:25%">注文個数</th>
+                    <th style="width:30%">注文ステータス</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td></td>
+                    <td class="link-underline"><a href="{{url_for('admin_order.show', id=order.id)}}">{{ order.created_at }}</a></td>
+                    <td>{{ order.order_items_amount() }}</td>
+                    <td class="pl-0">
+                        <div class="col-5 text-center pl-0">{{ order.status_ja() }}</div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>  

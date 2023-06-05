@@ -1,0 +1,53 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="col-7 d-flex justify-content-center mb-3">
+    <h4 class="bg-gray">{{ customer.full_name() }}さんの会員詳細</h4>
+</div>
+<table class="table table-borderless ml-4">
+    <tbody>
+        <tr>
+            <td>会員ID</td>
+            <td colspan="2">{{ customer.id }}</td>
+        </tr>
+        <tr>
+            <td>氏名</td>
+            <td colspan="2">{{ customer.full_name() }}</td>
+        </tr>
+        <tr>
+            <td>フリガナ</td>
+            <td colspan="2">{{ customer.full_name_kana() }}</td>
+        </tr>
+        <tr>
+            <td>郵便番号</td>
+            <td colspan="2">{{ customer.post_code }}</td>
+        </tr>
+        <tr>
+            <td>住所</td>
+            <td colspan="2">{{ customer.address }}</td>
+        </tr>
+        <tr>
+            <td>電話番号</td>
+            <td colspan="2">{{ customer.tel_number }}</td>
+        </tr>
+        <tr>
+            <td>メールアドレス</td>
+            <td colspan="2">{{ customer.email }}</td>
+        </tr>
+        <tr>
+            <td>会員ステータス</td>
+            <td colspan="2">
+                {% if customer.is_active %} 
+                    <strong class="text-success">有効</strong>
+                {% else %}
+                    <strong class="text-secondary">退会</strong>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td style="width:15%"></td>
+            <td style="width:15%"><a href="{{url_for('admin_customer.edit', id=customer.id)}}" class="btn btn-success px-3">編集する</a></td>
+            <td style="width:70%"><a href="{{url_for('admin_order.index', customer_id=customer.id)}}" class="btn btn-primary px-3">注文履歴一覧を見る</a></td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

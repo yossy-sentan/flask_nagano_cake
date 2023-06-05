@@ -1,0 +1,30 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<h4 class="bg-gray mb-5">ログイン</h4></br>
+<h5 class="bg-gray ml-4">会員の方はこちらからログイン</h5>
+<div class="d-flex justify-content-center">
+    <form action="{{url_for('public_session.create')}}" method="POST">
+        <table class="table table-borderless">
+            <tbody>
+                <tr>
+                    <td><label for="email">メールアドレス</label></td>
+                    <td><input type="email" name="email" id="email"></td>
+                </tr>
+                <tr>
+                    <td><label for="password">パスワード</label></td>
+                    <td><input type="password" name="password" id="password"></td>
+                </tr>
+                <tr>
+                <td></td>
+                <td><button type="submit" class="btn btn-primary">ログイン</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+  
+<h5 class="bg-gray ml-4">会員登録がお済みでない方</h5>
+<div class="col-7 d-flex justify-content-center">
+<p class="mt-3 link-underline"><a href="{{url_for('customer.new')}}">こちら</a>から新規登録を行ってください。</p>
+</div>
+{% endblock %}

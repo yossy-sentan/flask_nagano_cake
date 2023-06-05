@@ -1,0 +1,20 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+{% if request.args.get('customer_id') %}
+	<div class="col-6 d-flex justify-content-center mb-3">
+	  <h4 class="bg-gray link-dark"><a href="{{url_for('admin_customer.show', id=customer.id)}}">{{ customer.full_name() }}</a>さんの注文履歴一覧</h4>
+	</div>
+	{% include "admin/orders/customer_order_index.html" %}
+{% else %}
+	<div class="col-4 d-flex justify-content-center mb-3">
+  	<h4 class="bg-gray">
+  		{% if request.args.get('created_at') %}
+  			本日の注文履歴一覧
+  		{% else %}
+  			注文履歴一覧
+  		{% endif %}
+  	</h4>
+	</div>
+	{% include "admin/orders/order_index.html" %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="col-4 d-flex justify-content-center mb-5">
+    <h4 class="bg-gray">ジャンル一覧・追加</h4>
+</div>
+  
+<form action="{{url_for('admin_genre.create')}}" method="POST">
+    <label name="name">ジャンル名</label>
+    <input type="text" name="name" required>
+    <button type="submit">新規登録</button>
+</form>
+<table>
+    <thead>
+        <tr class="table-secondary">
+            <th class="pl-5" style="width:65%">ジャンル</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for genre in genres %} 
+            <tr>
+                <td class="link-black"><a href="{{url_for('admin_item.index', genre_id=genre.id)}}">{{ genre.name }}</a></td>
+                <td><a href="{{url_for('admin_genre.edit', id=genre.id)}}" class="btn btn-success px-3">編集する</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

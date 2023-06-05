@@ -1,0 +1,13 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="text-center mt-5 pt-5">
+	<h2 class="mb-5"><strong>本当に退会しますか？</strong></h2>
+	<h3>退会すると、会員登録情報や<br>これまでの購入履歴が閲覧できなくなります。<br>退会する場合は、「退会する」をクリックしてください。</h3>
+	<div class="mt-5">
+		<a href="{{url_for('customer.show')}}" class="btn btn-primary px-3">退会しない</a>
+		<form action="{{url_for('customer.withdraw')}}" method="POST">
+            <button type="submit" class="btn btn-danger px-4">退会する</button>
+        </form>
+	</div>
+</div>
+{% endblock %}

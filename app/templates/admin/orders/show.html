@@ -1,0 +1,97 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="col-4 d-flex justify-content-center mb-3">
+	<h4 class="bg-gray">注文履歴詳細</h4>
+</div>
+<table class="table table-borderless link-underline link-dark">
+    <tbody>
+        <tr>
+            <td style="width:15%"><strong>購入者</strong></td>
+            <td><a href="{{url_for('admin_customer.show', id=order.customer.id)}}">{{ order.customer.full_name() }}</a></td>
+        </tr>
+        <tr>
+            <td><strong>注文日</strong></td>
+            <td>{{ order.created_at }}</td>
+        </tr>
+        <tr>
+            <td><strong>配送先</strong></td>
+            <td>
+                〒{{ order.post_code }} {{ order.address }}<br>
+                {{ order.name }}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>支払方法</strong></td>
+            <td>{{ order.payment_method_ja() }}</td>
+        </tr>
+        <tr>
+            <td class="align-middle"><strong>注文ステータス</strong></td>
+            <td>
+                <form action="{{url_for('admin_order.update', id=order.id)}}" method="POST">
+                    <select name="status" class="classic mr-4">
+                        {% for key, value in order.status_enum.items() %} 
+                            <option value="{{key}}" {{ "selected" if key == order.status}}>{{value}}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-success">更新</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="row">
+	<div class="col-9">
+		<table class="table admin-table link-dark" style="width:95%">
+			<thead>
+				<tr class="table-secondary">
+					<th style="width:25%">商品名</th>
+					<th class="text-center" style="width:15%">単価(税込)</th>
+					<th class="text-center" style="width:15%">数量</th>
+					<th class="text-center" style="width:15%">小計</th>
+					<th class="pl-3" style="width:30%">製作ステータス</th>
+				</tr>
+			</thead>
+			<tbody>
+                {% for order_item in order_items %}
+                    <tr>
+                        <td>{{ order_item.item.name }}</td>
+                        <td class="text-center">{{ order_item.price }}</td>
+                        <td class="text-center">{{ order_item.amount }}</td>
+                        <td class="text-center">{{ order_item.price * order_item.amount }}</td>
+                        <td>
+                            <form action="{{url_for('admin_order_item.update', id=order_item.id)}}" method="POST">
+                                <select name="making_status" class="classic mr-2">
+                                    {% for key, value in order_item.making_status_enum.items() %} 
+                                        <option value="{{key}}" {{ "selected" if key == order_item.making_status}}>{{value}}</option>
+                                    {% endfor %}
+                                </select>
+                                <button type="submit" class="btn btn-success">更新</button>
+                            </form>
+                        </td>
+                    </tr> 
+                {% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+    <div class="col-3 position-relative pl-0">
+		<table class="table table-borderless position-absolute pr-0" style="bottom:0">
+			<tbody>
+				<tr>
+					<td class="pb-0" style="width:40%"><strong>商品合計</strong></td>
+					<td class="pb-0">{{ order.total_price - order.shipping_cost }}</td>
+				</tr>
+				<tr>
+					<td class="pb-0"><strong>送料</strong></td>
+					<td class="pb-0">{{ order.shipping_cost }}</td>
+				</tr>
+				<tr>
+					<td class="pb-0 pr-0"><strong>請求合計金額</strong></td>
+					<td class="pb-0"><strong>{{ order.total_price }}円</strong></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="col-5 d-flex justify-content-center">
+	<h4 class="bg-gray">注文情報入力</h4>
+</div>
+
+<form action="{{url_for('order.confirm')}}" method="POST">
+	<h4>支払方法</h4>
+	<div class="form-group ml-5">
+        <input type="radio" name="payment_method" id="credit" value="0" checked>
+        <label for="credit">クレジットカード</label><br>
+        <input type="radio" name="payment_method" id="bank" value="1">
+        <label for="bank">銀行振込</label><br>
+        <input type="radio" name="payment_method" id="daibiki" value="2">
+        <label for="daibiki">代引き</label><br>
+        <input type="radio" name="payment_method" id="paypay" value="3">
+        <label for="paypay">PayPay</label>
+    </div>
+	<h4>お届け先</h4>
+	<div class="form-group ml-5">
+        <input type="radio" name="selected_address" id="my_address" value="0" checked>
+        <label for="my_address">ご自身の住所</label>
+  	    <div class="ml-4">
+			〒{{ current_user.post_code }}{{ current_user.address }}</br>
+			{{ current_user.full_name() }}
+		</div>
+	</div>
+	<div class="form-group ml-5">
+        <input type="radio" name="selected_address" id="addresses" value="1">
+        <label for="addresses">登録済み住所から選択</label><br>
+        <select name="address_id" class="classic ml-4">
+            {% for address in addresses %} 
+                <option value="{{ address.id }}">{{ address.show_address() }}</option>
+            {% endfor %}
+        </select>
+	</div>
+	<div class="form-group ml-5">
+        <input type="radio" name="selected_address" id="new_address" value="2">
+        <label for="new_address">新しいお届け先</label>
+        <table class="table table-borderless ml-3">
+            <tbody>
+                <tr>
+                    <td style="width:25%"><label for="post_code">郵便番号(ハイフンなし)</label></td>
+                    <td><input type="number" name="post_code" id="post_code"></td>
+                </tr>
+                <tr>
+                    <td><label for="address">住所</label></td>
+                    <td><input type="text" name="address" id="address"></td>
+                </tr>
+                <tr>
+                    <td><label for="name">宛名</label></td>
+                    <td><input type="text" name="name" id="name"></td>
+                </tr>
+            </tbody>
+        </table>
+	</div>
+	<div class="text-center">
+        <button type="submit" class="btn btn-primary px-4">確認画面へ進む</button>
+    </div>
+</form>
+{% endblock %}

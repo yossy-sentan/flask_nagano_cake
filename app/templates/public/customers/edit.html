@@ -1,0 +1,51 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="col-4 d-flex justify-content-center mb-3">
+    <h4 class="bg-gray">会員情報編集</h4>
+</div>
+<form action="{{url_for('customer.update')}}" method="POST">
+    <table class="customer-form table table-borderless">
+        <tbody>
+            <tr>
+                <td style="width:20%">氏名</td>
+                <td style="width:25%"><label for="last_name" class="customer-name">(性)</label><input type="text" name="last_name" id="last_name" value="{{current_user.last_name}}" required></td>
+                <td style="width:25%"><label for="first_name" class="customer-name">(名)</label><input type="text" name="first_name" id="first_name" value="{{current_user.first_name}}" required></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>フリガナ</td>
+                <td><label for="last_name_kana">(セイ)</label><input type="text" name="last_name_kana" id="last_name_kana" value="{{current_user.last_name_kana}}" required></td>
+                <td><label for="first_name_kana">(メイ)</label><input type="text" name="first_name_kana" id="first_name_kana" value="{{current_user.last_name_kana}}" required></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><label for="email">メールアドレス</label>
+                <td><input type="email" name="email" id="email" value="{{current_user.email}}" required></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><label for="post_code">郵便番号(ハイフンなし)</label></td>
+                <td><input type="number" name="post_code" id="post_code" value="{{current_user.post_code}}" required></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><label for="address">住所</label></td>
+                <td colspan="3"><input type="text" name="address" id="address" value="{{current_user.address}}" required></td>
+            </tr>
+            <tr>
+                <td><label for="tel_number">電話番号(ハイフンなし)</label></td>
+                <td><input type="number" name="tel_number" id="tel_number" value="{{current_user.tel_number}}" required></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="submit" class="btn btn-success">変更内容を保存</button></td>
+                <td></td>
+                <td class="pl-0"><a href="{{url_for('customer.unsubscribe')}}" class="btn btn-danger px-3">退会する</a></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+{% endblock %}

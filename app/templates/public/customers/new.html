@@ -1,0 +1,63 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="col-4 d-flex justify-content-center">
+    <h4 class="bg-gray">新規会員登録</h4>
+</div>
+<form action="{{url_for('customer.create')}}" method="POST">
+    <table class="customer-form table table-borderless">
+        <tbody>
+            <tr>
+                <td>氏名</td>
+                <td style="width:30%"><label for="last_name" class="customer-name">(性)</label><input type="text" name="last_name" id="last_name" required></td>
+                <td><label for="first_name" class="customer-name">(名)</label><input type="text" name="first_name" id="first_name" required></td>
+            </tr>
+            <tr>
+                <td>フリガナ</td>
+                <td><label for="last_name_kana">(セイ)</label><input type="text" name="last_name_kana" id="last_name_kana" required></td>
+                <td><label for="first_name_kana">(メイ)</label><input type="text" name="first_name_kana" id="first_name_kana" required></td>
+            </tr>
+            <tr>
+                <td><label for="email">メールアドレス</label>
+                <td><input type="email" name="email" id="email" required></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><label for="post_code">郵便番号(ハイフンなし)</label></td>
+                <td><input type="number" name="post_code" id="post_code" required></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><label for="address">住所</label></td>
+                <td colspan="2"><input type="text" name="address" id="address" required></td>
+            </tr>
+            <tr>
+                <td><label for="tel_number">電話番号(ハイフンなし)</label></td>
+                <td><input type="number" name="tel_number" id="tel_number" required></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><label for="password">パスワード(6文字以上)</label></td>
+                <td><input type="password" name="password" id="password" minlength="6" required></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><label for="confirm_password">パスワード(確認用)</label></td>
+                <td><input type="password" name="confirm_password" id="confirm_password" minlength="6" required></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="submit" class="btn btn-success">新規登録</button></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<div class="col-4 d-flex justify-content-center">
+    <h4 class="bg-gray">既に登録済みの方</h2>
+</div>
+<div class="col-6 d-flex justify-content-center">
+    <p class="pt-3 link-underline"><a href="{{url_for('public_session.new')}}">こちら</a> からログインしてください。</p>
+</div>
+{% endblock %}

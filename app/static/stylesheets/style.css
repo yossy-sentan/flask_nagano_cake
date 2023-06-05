@@ -1,0 +1,157 @@
+/* コンテンツに余裕があるときフッターを最下部に固定 */
+body {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  margin-top: 40px;
+}
+
+/* 見出しの背景 */
+.bg-gray {
+  background-color: #dcdcdc;
+  display: inline-block;
+  padding: 0px 30px;
+}
+
+/* リンクの下線 */
+.link-underline a {
+    text-decoration: underline;
+}
+
+/* リンクの色を黒に */
+.link-dark a {
+    color:inherit;
+}
+
+/* セレクトボックスの矢印設定 */
+select {
+
+  /* styling */
+  background-color: white;
+  /* border: thin solid blue; */
+  border-radius: 4px;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 0.4em 3.5em 0.4em 1em;
+
+  /* reset */
+
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select.classic {
+  background-image:
+    linear-gradient(45deg, transparent 50%, white 50%),
+    linear-gradient(135deg, white 50%, transparent 50%),
+    linear-gradient(to right, skyblue, skyblue);
+  background-position:
+    calc(100% - 20px) calc(1em + 1px),
+    calc(100% - 15px) calc(1em + 1px),
+    100% 0;
+  background-size:
+    5px 5px,
+    5px 5px,
+    2.5em 2.5em;
+  background-repeat: no-repeat;
+}
+
+/* table-borderdの線を黒に, paddingの調整 */
+.table-bordered > thead > tr > th{
+  border:1px solid black;
+  padding-left: 0.25rem;
+}
+
+.table-bordered > tbody > tr > td{
+  border:1px solid black;
+  padding: 0.25rem;
+  vertical-align: middle;
+}
+/* tbody内のtd間の境界線なし */
+.table-thead-borderd {
+  thead > tr > th, tbody  {
+    border: 1px solid black;
+  }
+  tbody > tr > td {
+    border: 0;
+  }
+}
+
+/* トップ画面のメッセージ設定 */
+.top-massage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  height: 400px;
+  margin-bottom: 20px;
+  background: no-repeat url("../images/top-mv.jpg") center/cover;
+  p {
+    width: 500px;
+    padding: 50px;
+    font-size: 16px;
+    text-align: center;
+    background-color: rgba(255,255,255,0.8);
+  }
+}
+
+/* 顧客の新規登録画面 */
+table.customer-form {
+  tbody {
+    tr:nth-child(n+3) {
+      td:nth-child(2) {
+        padding-left: 58px;
+      }
+    }
+  }
+}
+
+label.customer-name {
+  display: inline-block;
+  padding-right: 14px;
+}
+
+/* テーブルの1行目だけ灰色に, padding調整 */
+.td-active > tbody > tr {
+  td {
+    padding: 0.75rem;
+    padding-left: 0.25rem;
+    vertical-align: middle
+  }
+
+  td:nth-child(2n+1) {
+    background-color: rgba(0, 0, 0, 0.075);
+  }
+}
+
+.admin-table {
+  th {
+    border-top: 1px solid #c0c0c0;
+    border-bottom: 1px solid #c0c0c0 !important;
+  }
+
+  td {
+    border-top: none;
+    border-bottom: 1px solid #c0c0c0;
+    vertical-align: middle
+  }
+}
+
+.admin-item-form {
+  input[type="text"],input[type="number"], textarea, select {
+    width: 320px;
+  }
+
+  textarea {
+    height: 180px;
+  }
+}

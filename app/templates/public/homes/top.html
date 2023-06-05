@@ -1,0 +1,32 @@
+{% extends "layouts/layout.html" %}
+{% block body %}
+<div class="row">
+	<div class="col-3">
+		{% include 'public/genres/index.html' %}
+	</div>
+
+	<div class="col-9">
+		<div class="row top-massage ml-0" >
+			<p>
+				ようこそ、NaganoCakeへ!<br>
+				このサイトは、ケーキ販売のECサイトになります。<br>
+				会員でない方も商品の閲覧はできますが、<br>
+				購入には会員登録が必要になります。
+			</p>
+		</div>
+		<h2>新着商品</h2>
+		<div class="row flex-nowrap ml-0">
+            {% for item in items %} 
+                <div class="col-3 pl-0">
+                    <a href="{{url_for('item.show', id=item.id)}}"><img src="{{ item.image_path }}" width="200" height="160"></a>
+                    <p class="my-2">{{ item.name }}</p>
+                    ￥{{ item.with_tax_price() }}
+                </div>
+            {% endfor %}
+		</div>
+		<div class="text-right link-underline mt-2">
+			<a href="{{url_for('item.index')}}">すべての商品を見る ></a>
+		</div>
+	</div>
+</div>
+{% endblock %}
